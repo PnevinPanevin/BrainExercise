@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation.xml"
+            app:startDestination="@id/exercisesFragment">
+
+    <fragment android:id="@+id/helpFragment" android:name="com.sharipov.brainexercise.view.home.HelpFragment"
+              android:label="fragment_home" tools:layout="@layout/fragment_help"/>
+    <fragment android:id="@+id/exercisesFragment"
+              android:name="com.sharipov.brainexercise.view.exercises.ExercisesFragment"
+              android:label="fragment_exercises" tools:layout="@layout/fragment_exercises">
+        <action android:id="@+id/action_exercisesFragment_to_shapesFragment" app:destination="@id/shapesFragment"
+                app:enterAnim="@anim/nav_default_pop_enter_anim" app:exitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_exercisesFragment_to_expressionsFragment"
+            app:destination="@id/expressionsFragment" />
+    </fragment>
+    <fragment android:id="@+id/statisticsFragment"
+              android:name="com.sharipov.brainexercise.view.statistics.StatisticsFragment"
+              android:label="fragment_statistics" tools:layout="@layout/fragment_statistics"/>
+    <fragment android:id="@+id/shapesFragment"
+              android:name="com.sharipov.brainexercise.view.activity_test.shapes.ShapesFragment"
+              android:label="shapes_fragment" tools:layout="@layout/fragment_shapes"/>
+    <fragment
+        android:id="@+id/expressionsFragment"
+        android:name="com.sharipov.brainexercise.view.activity_test.math.ExpressionsFragment"
+        android:label="ExpressionsFragment" />
+</navigation>

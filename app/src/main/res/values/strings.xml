@@ -1,0 +1,53 @@
+<resources>
+    <string name="app_name">Brain Exercise</string>
+    <string name="title_home">Home</string>
+    <string name="title_exercises">Exercises</string>
+    <string name="title_statistics">Statistics</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_in">sign in</string>
+    <string name="already_have_an_account_sign_in">Sign in here</string>
+    <string name="don_t_have_an_account_sign_up">Sign up here</string>
+    <string name="email">e-mail</string>
+    <string name="password_hint">password</string>
+    <string name="sign_up">sign up</string>
+    <string name="confirm_hint">password confirmation</string>
+    <string name="speed">Speed</string>
+    <string name="shapes">Shapes</string>
+    <string name="flexibility">Flexibility</string>
+    <string name="colors">Colors</string>
+    <string name="positions">Positions</string>
+    <string name="swipes">Swipes</string>
+    <string name="math">Math</string>
+    <string name="expressions">Expressions</string>
+    <string name="comparison">Comparison</string>
+    <string name="progressions">Progressions</string>
+    <string name="title_help">Help</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="time_left">Время:</string>
+    <string name="score">Счёт:</string>
+    <string name="card_dialog_positive_button">Продолжить</string>
+    <string name="card_dialog_button_restart_card_test">Заново</string>
+    <string name="card_dialog_message">Ваш результат:</string>
+    <string name="card_finish_dialog_title">Тест завершён!</string>
+    <string name="card_pause_dialog_title">Тест приостановлен</string>
+    <string name="card_pause_dialog_continue_button">Продолжить</string>
+    <string name="card_quit_dialog_title">Покинуть тест?</string>
+    <string name="card_quit_dialog_positive_button">Покинуть</string>
+    <string name="card_quit_dialog_continue_button">Остаться</string>
+    <string name="answer">Ответ</string>
+    <string name="button_7">7</string>
+    <string name="button_8">8</string>
+    <string name="button_9">9</string>
+    <string name="button_4">4</string>
+    <string name="button_5">5</string>
+    <string name="button_6">6</string>
+    <string name="button_1">1</string>
+    <string name="button_2">2</string>
+    <string name="button_3">3</string>
+    <string name="button_return">\u23CE</string>
+    <string name="button_0">0</string>
+    <string name="button_backspace">\u232B</string>
+</resources>

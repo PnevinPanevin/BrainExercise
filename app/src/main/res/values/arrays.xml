@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="category_titles">
+        <item>Speed</item>
+        <item>Flexibility</item>
+        <item>Math</item>
+    </string-array>
+
+    <integer-array name="category_item_titles">
+        <item>@array/speed_titles</item>
+        <item>@array/flexibility_titles</item>
+        <item>@array/math_titles</item>
+    </integer-array>
+    <integer-array name="category_item_images">
+        <item>@array/speed_images</item>
+        <item>@array/flexibility_images</item>
+        <item>@array/math_images</item>
+    </integer-array>
+
+    <string-array name="speed_titles">
+        <item>Shapes</item>
+        <item>Positions</item>
+    </string-array>
+    <integer-array name="speed_images">
+        <item>@drawable/category_item_shapes</item>
+        <item>@drawable/category_item_positions</item>
+    </integer-array>
+
+    <string-array name="flexibility_titles">
+        <item>Colors</item>
+        <item>Swipes</item>
+    </string-array>
+    <integer-array name="flexibility_images">
+        <item>@drawable/category_item_colors</item>
+        <item>@drawable/category_item_swipes</item>
+    </integer-array>
+
+    <string-array name="math_titles">
+        <item>Expressions</item>
+        <item>Comparisons</item>
+        <item>Progressions</item>
+    </string-array>
+    <integer-array name="math_images">
+        <item>@drawable/category_item_expressions</item>
+        <item>@drawable/category_item_comparison</item>
+        <item>@drawable/category_item_progressions</item>
+    </integer-array>
+</resources>
