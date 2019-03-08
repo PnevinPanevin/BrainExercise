@@ -110,13 +110,9 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView, OnBackPressedListe
         countDownTextView.visibility = visibility
     }
 
-    override fun scrollToBeginning() {
-        recyclerView.scrollToPosition(0)
-    }
+    override fun scrollToBeginning() = recyclerView.scrollToPosition(0)
 
-    override fun scrollToPosition(position: Int) {
-        recyclerView.smoothScrollToPosition(position)
-    }
+    override fun scrollToPosition(position: Int) = recyclerView.smoothScrollToPosition(position)
 
     override fun showPauseDialog(score: Int) = dialogManager.showPauseDialog(score)
 
@@ -124,9 +120,7 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView, OnBackPressedListe
 
     override fun showLeaveDialog(score: Int) = dialogManager.showLeaveDialog(score)
 
-    override fun onBackPressed() {
-        presenter.onLeaveTest()
-    }
+    override fun onBackPressed() = presenter.onLeaveTest()
 
     override fun onDetach() {
         super.onDetach()
