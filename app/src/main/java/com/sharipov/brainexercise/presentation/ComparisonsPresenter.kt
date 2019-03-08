@@ -16,7 +16,7 @@ class ComparisonsPresenter : MvpPresenter<TestView>(), TestPresenter {
     private var currentPosition: Int = 0
     lateinit var state: TestPresenter.State
 
-    lateinit var comparisonsAdapter: ComparisonsAdapter
+    val comparisonsAdapter: ComparisonsAdapter = ComparisonsAdapter()
 
     private val countDownTimer: TestTimer =
         TestTimer(TestPresenter.FIRST_COUNTDOWN, TestPresenter.TICK_INTERVAL).apply {

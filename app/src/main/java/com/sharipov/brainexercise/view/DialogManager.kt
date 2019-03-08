@@ -47,7 +47,10 @@ class DialogManager {
         score,
         R.string.card_quit_dialog_title,
         R.string.card_quit_dialog_positive_button,
-        DialogInterface.OnClickListener { d, w -> activity?.findNavController(R.id.navHostFragment)?.navigateUp() },
+        DialogInterface.OnClickListener { d, w ->
+            activity?.findNavController(R.id.navHostFragment)
+                ?.navigate(R.id.exercisesFragment)
+        },
         R.string.card_quit_dialog_continue_button,
         DialogInterface.OnClickListener { d, w -> presenter?.onFragmentResume() }
     )

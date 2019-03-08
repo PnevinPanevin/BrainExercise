@@ -8,7 +8,7 @@ import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.util.TestTimer
 import com.sharipov.brainexercise.util.formatAsTime
-import com.sharipov.brainexercise.view.activity_test.math.ExpressionsAdapter
+import com.sharipov.brainexercise.view.activity_test.expressions.ExpressionsAdapter
 
 @InjectViewState
 class ExpressionsPresenter : MvpPresenter<TestView>(), TestPresenter {

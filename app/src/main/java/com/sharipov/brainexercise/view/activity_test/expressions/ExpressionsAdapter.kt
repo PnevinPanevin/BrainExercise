@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.view.activity_test.math
+package com.sharipov.brainexercise.view.activity_test.expressions
 
 import android.view.LayoutInflater
 import android.view.View

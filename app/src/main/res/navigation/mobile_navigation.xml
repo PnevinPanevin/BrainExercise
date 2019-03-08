@@ -26,7 +26,7 @@
               android:label="shapes_fragment" tools:layout="@layout/fragment_shapes"/>
     <fragment
         android:id="@+id/expressionsFragment"
-        android:name="com.sharipov.brainexercise.view.activity_test.math.ExpressionsFragment"
+        android:name="com.sharipov.brainexercise.view.activity_test.expressions.ExpressionsFragment"
         android:label="ExpressionsFragment" />
     <fragment
         android:id="@+id/comparisonsFragment"

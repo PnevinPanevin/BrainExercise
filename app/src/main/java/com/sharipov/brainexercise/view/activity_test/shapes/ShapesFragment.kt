@@ -12,6 +12,7 @@ import com.sharipov.brainexercise.model.Answer
 import com.sharipov.brainexercise.mvp.OnBackPressedListener
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.ShapesPresenter
+import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
 import kotlinx.android.synthetic.main.fragment_shapes.*
 import kotlinx.android.synthetic.main.fragment_shapes.view.*
@@ -43,11 +44,11 @@ class ShapesFragment : MvpAppCompatFragment(), TestView, OnBackPressedListener {
         presenter.onPrepareTest()
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) = with(recyclerView) {
+    private fun setupRecyclerView(recyclerView: LockableRecyclerView) = with(recyclerView) {
         layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = presenter.shapesAdapter
+        isLocked = true
         hasFixedSize()
-        setOnTouchListener { v, e -> true }
     }
 
     override fun updateCountDown(countsLeft: String) {

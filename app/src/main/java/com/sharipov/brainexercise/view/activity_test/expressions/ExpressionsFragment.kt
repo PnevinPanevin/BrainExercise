@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.view.activity_test.math
+package com.sharipov.brainexercise.view.activity_test.expressions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +13,7 @@ import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.mvp.OnBackPressedListener
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.ExpressionsPresenter
+import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
 import kotlinx.android.synthetic.main.fragment_expressions.*
 import kotlinx.android.synthetic.main.fragment_expressions.view.*
@@ -86,11 +87,11 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView, OnBackPressedListe
         presenter.onPrepareTest()
     }
 
-    private fun setupRecyclerView(recyclerView: RecyclerView) = with(recyclerView) {
+    private fun setupRecyclerView(recyclerView: LockableRecyclerView) = with(recyclerView) {
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         adapter = presenter.expressionsAdapter
+        isLocked = true
         hasFixedSize()
-        setOnTouchListener { v, e -> true }
     }
 
     override fun updateTime(timeLeft: String) {

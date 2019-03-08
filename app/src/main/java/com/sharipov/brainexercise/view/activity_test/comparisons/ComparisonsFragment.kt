@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.ComparisonAnswer
-import com.sharipov.brainexercise.model.ComparisonsRepository
 import com.sharipov.brainexercise.mvp.OnBackPressedListener
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.ComparisonsPresenter
+import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
 import kotlinx.android.synthetic.main.count_down_text_view.*
 import kotlinx.android.synthetic.main.fragment_comparisons.*
@@ -35,14 +37,7 @@ class ComparisonsFragment : MvpAppCompatFragment(),
     ): View? {
         return inflater.inflate(R.layout.fragment_comparisons, container, false)
             .apply {
-                val comparisonsAdapter = ComparisonsAdapter(fragmentManager)
-                comparisonsAdapter.comparisons = ComparisonsRepository.getCardList()
-                comparisonsAdapter.onAnswerListener = this@ComparisonsFragment
-
-                viewPager.isLocked = true
-                viewPager.adapter = comparisonsAdapter
-                presenter.comparisonsAdapter = comparisonsAdapter
-
+                setupRecyclerView(recyclerView)
                 dialogManager.onAttach(activity, presenter)
             }
     }
@@ -50,6 +45,15 @@ class ComparisonsFragment : MvpAppCompatFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         presenter.onPrepareTest()
+    }
+
+    private fun setupRecyclerView(recyclerView: LockableRecyclerView) = with(recyclerView) {
+        val comparisonsAdapter = presenter.comparisonsAdapter
+        comparisonsAdapter.onAnswerListener = this@ComparisonsFragment
+        layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
+        adapter = comparisonsAdapter
+        isLocked = true
+        hasFixedSize()
     }
 
     override fun updateTime(timeLeft: String) {
@@ -68,11 +72,9 @@ class ComparisonsFragment : MvpAppCompatFragment(),
         countDownTextView.visibility = visibility
     }
 
-    override fun scrollToBeginning() = viewPager.setCurrentItem(0, false)
+    override fun scrollToBeginning() = recyclerView.scrollToPosition(0)
 
-    override fun scrollToPosition(position: Int) {
-        viewPager.currentItem = position
-    }
+    override fun scrollToPosition(position: Int) = recyclerView.smoothScrollToPosition(position)
 
     override fun showPauseDialog(score: Int) = dialogManager.showPauseDialog(score)
 

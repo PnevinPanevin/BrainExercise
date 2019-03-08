@@ -16,7 +16,7 @@
         tools:text="3"
         tools:visibility="gone"/>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.sharipov.brainexercise.util.LockableRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"

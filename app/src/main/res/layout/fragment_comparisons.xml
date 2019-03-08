@@ -10,9 +10,10 @@
 
     <include layout="@layout/count_down_text_view"/>
 
-    <com.sharipov.brainexercise.util.LockableViewPager
-        android:id="@+id/viewPager"
+    <com.sharipov.brainexercise.util.LockableRecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        tools:listitem="@layout/fragment_comparisons_item"/>
 
 </LinearLayout>
