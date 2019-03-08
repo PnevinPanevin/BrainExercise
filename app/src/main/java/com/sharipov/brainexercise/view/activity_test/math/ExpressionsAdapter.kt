@@ -17,9 +17,7 @@ class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsVi
         return ExpressionsViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return cardList.size
-    }
+    override fun getItemCount(): Int = cardList.size
 
     override fun onBindViewHolder(holder: ExpressionsViewHolder, position: Int): Unit = with(holder.itemView) {
         taskTextView.text = cardList[position].expression

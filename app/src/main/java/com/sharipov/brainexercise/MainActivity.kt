@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.Navigator
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
@@ -30,7 +29,7 @@ class MainActivity : MvpAppCompatActivity() {
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when (destination.id) {
                 R.id.helpFragment, R.id.exercisesFragment, R.id.statisticsFragment -> onMainDestinations()
-                R.id.shapesFragment, R.id.expressionsFragment -> onTestStarted()
+                R.id.shapesFragment, R.id.expressionsFragment, R.id.comparisonsFragment -> onTestStarted()
             }
         }
     }

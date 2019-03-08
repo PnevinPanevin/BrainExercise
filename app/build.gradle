@@ -43,14 +43,10 @@ dependencies {
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version" // use -ktx for Kotlin
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version" // use -ktx for Kotlin
 
-    //CardView
     implementation 'androidx.cardview:cardview:1.0.0'
-
-    //GridLayout
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
-
-    //RecyclerView
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
 
     //Gson
     implementation 'com.google.code.gson:gson:2.8.5'

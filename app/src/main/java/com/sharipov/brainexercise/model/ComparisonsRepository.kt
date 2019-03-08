@@ -40,7 +40,7 @@ object ComparisonsRepository {
 
         val expression = getExpression(firstInt, "/", secondInt)
         val second = getGeneratedSecond(result)
-        val answer = result.compareTo(second)
+        val answer = getAnswer(result, second)
         return Comparison(expression, second.toString(), answer)
     }
 
@@ -51,7 +51,7 @@ object ComparisonsRepository {
 
         val first = getExpression(firstInt, "*", secondInt)
         val second = getGeneratedSecond(result)
-        val answer = result.compareTo(second)
+        val answer = getAnswer(result, second)
         return Comparison(first, second.toString(), answer)
     }
 
@@ -62,7 +62,7 @@ object ComparisonsRepository {
 
         val first = getExpression(firstInt, "-", secondInt)
         val second = getGeneratedSecond(result)
-        val answer = result.compareTo(second)
+        val answer = getAnswer(result, second)
 
         return Comparison(first, second.toString(), answer)
     }
@@ -74,7 +74,7 @@ object ComparisonsRepository {
 
         val first = getExpression(firstInt, "+", secondInt)
         val second = getGeneratedSecond(result)
-        val answer = result.compareTo(second)
+        val answer = getAnswer(result, second)
         return Comparison(first, second.toString(), answer)
     }
 
@@ -83,11 +83,21 @@ object ComparisonsRepository {
         return result + difference
     }
 
-    private fun getExpression(first: Int, sign: String, second: Int): String = "$first $sign $second = ?"
+    private fun getExpression(first: Int, sign: String, second: Int): String = "$first $sign $second"
+
+    private fun getAnswer(firstInt: Int, secondInt: Int): ComparisonAnswer = when {
+        firstInt == secondInt -> ComparisonAnswer.EQUAL
+        firstInt > secondInt -> ComparisonAnswer.FIRST
+        else -> ComparisonAnswer.SECOND
+    }
 }
 
 data class Comparison(
     val first: String,
     val second: String,
-    val answer: Int
+    val answer: ComparisonAnswer
 )
+
+enum class ComparisonAnswer {
+    FIRST, SECOND, EQUAL
+}

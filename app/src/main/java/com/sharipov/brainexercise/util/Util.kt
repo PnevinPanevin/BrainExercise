@@ -19,7 +19,7 @@ object Util{
 //        categories += Category("Flexibility", flex)
 //
         math += CategoryItem("Expressions", R.drawable.category_item_expressions, R.id.action_exercisesFragment_to_expressionsFragment)
-//        math += CategoryItem("Comparisons", R.drawable.category_item_comparison)
+        math += CategoryItem("Comparisons", R.drawable.category_item_comparison, R.id.action_exercisesFragment_to_comparisonsFragment)
 //        math += CategoryItem("Progressions", R.drawable.category_item_progressions)
         categories += Category("Math", math)
 
