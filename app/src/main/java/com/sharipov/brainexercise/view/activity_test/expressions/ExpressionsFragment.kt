@@ -122,6 +122,16 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView, OnBackPressedListe
 
     override fun onBackPressed() = presenter.onLeaveTest()
 
+    override fun onPause() {
+        super.onPause()
+        presenter.onFragmentPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onFragmentResume()
+    }
+
     override fun onDetach() {
         super.onDetach()
         dialogManager.onDetach()

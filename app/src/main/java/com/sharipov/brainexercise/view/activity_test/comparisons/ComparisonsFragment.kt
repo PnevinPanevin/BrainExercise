@@ -86,8 +86,18 @@ class ComparisonsFragment : MvpAppCompatFragment(),
 
     override fun onAnswer(answer: ComparisonAnswer) = presenter.checkAnswer(answer)
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDetach() {
+        super.onDetach()
         dialogManager.onDetach()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        presenter.onFragmentPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        presenter.onFragmentResume()
     }
 }
