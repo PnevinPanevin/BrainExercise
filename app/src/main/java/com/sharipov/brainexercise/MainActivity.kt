@@ -7,9 +7,8 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
-import com.sharipov.brainexercise.mvp.OnBackPressedListener
+import com.sharipov.brainexercise.mvp.TestView
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 
 class MainActivity : MvpAppCompatActivity() {
@@ -34,7 +33,7 @@ class MainActivity : MvpAppCompatActivity() {
         }
     }
 
-    private fun onMainDestinations(){
+    private fun onMainDestinations() {
         bottomNavigation.show()
         toolbar.show()
     }
@@ -46,7 +45,7 @@ class MainActivity : MvpAppCompatActivity() {
 
     override fun onBackPressed() {
         val currentFragment = navHostFragment.childFragmentManager.fragments[0]
-        if (currentFragment is OnBackPressedListener)
+        if (currentFragment is TestView)
             currentFragment.onBackPressed()
         else if (!navController.popBackStack())
             super.onBackPressed()
@@ -58,15 +57,9 @@ class MainActivity : MvpAppCompatActivity() {
 }
 
 fun View.hide() = with(this) {
-    if (visibility == android.view.View.VISIBLE && alpha == 1F)
-        animate().alpha(0F)
-            .withEndAction { visibility = android.view.View.GONE }
-            .duration = 0L
+    visibility = View.GONE
 }
 
 fun View.show() = with(this) {
-    if (visibility == View.GONE && alpha == 0F)
-        animate().alpha(1F)
-            .withEndAction { visibility = View.VISIBLE }
-            .duration = 0L
+    visibility = View.VISIBLE
 }

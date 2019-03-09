@@ -15,4 +15,5 @@ interface TestView: MvpView {
     fun showPauseDialog(score: Int)
     fun showFinishDialog(score: Int)
     fun showLeaveDialog(score: Int)
+    fun onBackPressed()
 }
