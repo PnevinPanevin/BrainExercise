@@ -11,8 +11,7 @@ import com.sharipov.brainexercise.model.ComparisonsRepository
 import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.fragment_comparisons_item.view.*
 
-class ComparisonsAdapter : RecyclerView.Adapter<ComparisonsAdapter.ComparisonViewHolder>(),
-    TestAdapter {
+class ComparisonsAdapter : RecyclerView.Adapter<ComparisonsAdapter.ComparisonViewHolder>(), TestAdapter {
 
     lateinit var comparisons: List<Comparison>
     lateinit var onAnswerListener: OnComparisionAnswerListener

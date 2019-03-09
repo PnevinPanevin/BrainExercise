@@ -10,8 +10,7 @@ import com.sharipov.brainexercise.model.ExpressionsRepository
 import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.shapes_card_item.view.*
 
-class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsViewHolder>(),
-    TestAdapter {
+class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsViewHolder>(), TestAdapter {
     lateinit var cardList: List<Expression>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpressionsViewHolder {

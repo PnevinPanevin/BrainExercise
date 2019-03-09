@@ -10,8 +10,7 @@ import com.sharipov.brainexercise.model.ShapeCard
 import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.shapes_card_item.view.*
 
-class ShapesAdapter : RecyclerView.Adapter<ShapesAdapter.CardsViewHolder>(),
-    TestAdapter {
+class ShapesAdapter : RecyclerView.Adapter<ShapesAdapter.CardsViewHolder>(), TestAdapter {
 
     lateinit var shapeCardList: List<ShapeCard>
 
