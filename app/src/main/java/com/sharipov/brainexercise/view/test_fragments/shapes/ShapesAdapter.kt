@@ -1,15 +1,18 @@
-package com.sharipov.brainexercise.view.activity_test.shapes
+package com.sharipov.brainexercise.view.test_fragments.shapes
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.Answer
+import com.sharipov.brainexercise.model.CardsRepository
 import com.sharipov.brainexercise.model.ShapeCard
+import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.shapes_card_item.view.*
 
-class ShapesAdapter : RecyclerView.Adapter<ShapesAdapter.CardsViewHolder>() {
+class ShapesAdapter : RecyclerView.Adapter<ShapesAdapter.CardsViewHolder>(),
+    TestAdapter {
+
     lateinit var shapeCardList: List<ShapeCard>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CardsViewHolder {
@@ -24,7 +27,12 @@ class ShapesAdapter : RecyclerView.Adapter<ShapesAdapter.CardsViewHolder>() {
             .shapeView
             .setImageResource(shapeCardList[position].shape)
 
-    fun getAnswer(position: Int): Answer = shapeCardList[position].answer
+    override fun <T> getAnswer(position: Int): T = shapeCardList[position].answer as T
+
+    override fun resetList() {
+        shapeCardList = CardsRepository.getShapeCardList()
+        notifyDataSetChanged()
+    }
 
     inner class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }

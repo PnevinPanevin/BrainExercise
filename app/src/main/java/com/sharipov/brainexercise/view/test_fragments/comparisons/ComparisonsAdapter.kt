@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.view.activity_test.comparisons
+package com.sharipov.brainexercise.view.test_fragments.comparisons
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,9 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.Comparison
 import com.sharipov.brainexercise.model.ComparisonAnswer
+import com.sharipov.brainexercise.model.ComparisonsRepository
+import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.fragment_comparisons_item.view.*
 
-class ComparisonsAdapter : RecyclerView.Adapter<ComparisonsAdapter.ComparisonViewHolder>() {
+class ComparisonsAdapter : RecyclerView.Adapter<ComparisonsAdapter.ComparisonViewHolder>(),
+    TestAdapter {
 
     lateinit var comparisons: List<Comparison>
     lateinit var onAnswerListener: OnComparisionAnswerListener
@@ -31,7 +34,12 @@ class ComparisonsAdapter : RecyclerView.Adapter<ComparisonsAdapter.ComparisonVie
 
     override fun getItemCount(): Int = comparisons.size
 
-    fun getAnswer(position: Int): ComparisonAnswer = comparisons[position].answer
+    override fun <T> getAnswer(position: Int): T = comparisons[position].answer as T
+
+    override fun resetList() {
+        comparisons = ComparisonsRepository.getCardList()
+        notifyDataSetChanged()
+    }
 
     inner class ComparisonViewHolder(view: View) : RecyclerView.ViewHolder(view)
 

@@ -22,15 +22,15 @@
               android:name="com.sharipov.brainexercise.view.statistics.StatisticsFragment"
               android:label="fragment_statistics" tools:layout="@layout/fragment_statistics"/>
     <fragment android:id="@+id/shapesFragment"
-              android:name="com.sharipov.brainexercise.view.activity_test.shapes.ShapesFragment"
+              android:name="com.sharipov.brainexercise.view.test_fragments.shapes.ShapesFragment"
               android:label="shapes_fragment" tools:layout="@layout/fragment_shapes"/>
     <fragment
         android:id="@+id/expressionsFragment"
-        android:name="com.sharipov.brainexercise.view.activity_test.expressions.ExpressionsFragment"
+        android:name="com.sharipov.brainexercise.view.test_fragments.expressions.ExpressionsFragment"
         android:label="ExpressionsFragment" />
     <fragment
         android:id="@+id/comparisonsFragment"
-        android:name="com.sharipov.brainexercise.view.activity_test.comparisons.ComparisonsFragment"
+        android:name="com.sharipov.brainexercise.view.test_fragments.comparisons.ComparisonsFragment"
         android:label="fragment_comparisons"
         tools:layout="@layout/fragment_comparisons" />
 </navigation>

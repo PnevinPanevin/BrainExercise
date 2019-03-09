@@ -1,9 +1,10 @@
-package com.sharipov.brainexercise.view.activity_test.shapes
+package com.sharipov.brainexercise.view.test_fragments.shapes
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
@@ -11,7 +12,7 @@ import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.Answer
 import com.sharipov.brainexercise.mvp.OnBackPressedListener
 import com.sharipov.brainexercise.mvp.TestView
-import com.sharipov.brainexercise.presentation.ShapesPresenter
+import com.sharipov.brainexercise.presentation.NBackPresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
 import kotlinx.android.synthetic.main.fragment_shapes.*
@@ -21,7 +22,7 @@ import kotlinx.android.synthetic.main.time_and_score.*
 class ShapesFragment : MvpAppCompatFragment(), TestView, OnBackPressedListener {
 
     @InjectPresenter
-    lateinit var presenter: ShapesPresenter
+    lateinit var presenter: NBackPresenter
 
     private val dialogManager = DialogManager()
 
@@ -45,8 +46,10 @@ class ShapesFragment : MvpAppCompatFragment(), TestView, OnBackPressedListener {
     }
 
     private fun setupRecyclerView(recyclerView: LockableRecyclerView) = with(recyclerView) {
-        layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
-        adapter = presenter.shapesAdapter
+        val shapesAdapter = ShapesAdapter()
+        presenter.testAdapter = shapesAdapter
+        adapter = shapesAdapter
+        layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         isLocked = true
         hasFixedSize()
     }

@@ -7,12 +7,15 @@ import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.util.TestTimer
 import com.sharipov.brainexercise.util.formatAsTime
+import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 
 @InjectViewState
-abstract class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
+open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     protected var score: Int = 0
     protected var currentPosition: Int = 0
     lateinit var state: TestPresenter.State
+
+    lateinit var testAdapter: TestAdapter
 
     private val countDownTimer: TestTimer =
         TestTimer(TestPresenter.FIRST_COUNTDOWN, TestPresenter.TICK_INTERVAL).apply {
@@ -48,7 +51,6 @@ abstract class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     override fun onStartTest() {
         viewState.updateCountDown("0")
         viewState.setCountDownVisibility(View.GONE)
-        //viewState.scrollToPosition(++currentPosition)
         testTimer.start()
         state = TestPresenter.State.STARTED
     }
@@ -74,9 +76,19 @@ abstract class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
         viewState.showFinishDialog(score)
     }
 
-    abstract override fun <T> checkAnswer(answer: T)
+    override fun <T> checkAnswer(answer: T){
+        val currentScore = score
 
-    abstract override fun resetList()
+        if (answer == testAdapter.getAnswer(currentPosition))
+            score = currentScore + 1
+        else if (currentScore > 0)
+            score = currentScore - 1
+
+        viewState.updateScore(score)
+        viewState.scrollToPosition(++currentPosition)
+    }
+
+    override fun resetList() = testAdapter.resetList()
 
     override fun onFragmentPause() = when (state) {
         TestPresenter.State.STARTED -> {

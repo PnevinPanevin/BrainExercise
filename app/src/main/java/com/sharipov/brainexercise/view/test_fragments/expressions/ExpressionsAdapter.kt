@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.view.activity_test.expressions
+package com.sharipov.brainexercise.view.test_fragments.expressions
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.Expression
+import com.sharipov.brainexercise.model.ExpressionsRepository
+import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.shapes_card_item.view.*
 
-class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsViewHolder>() {
+class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsViewHolder>(),
+    TestAdapter {
     lateinit var cardList: List<Expression>
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ExpressionsViewHolder {
@@ -23,7 +26,12 @@ class ExpressionsAdapter : RecyclerView.Adapter<ExpressionsAdapter.ExpressionsVi
         taskTextView.text = cardList[position].expression
     }
 
-    fun getAnswer(position: Int): Int = cardList[position].answer
+    override fun <T> getAnswer(position: Int): T = cardList[position].answer as T
+
+    override fun resetList() {
+        cardList = ExpressionsRepository.getCardList()
+        notifyDataSetChanged()
+    }
 
     inner class ExpressionsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 }
