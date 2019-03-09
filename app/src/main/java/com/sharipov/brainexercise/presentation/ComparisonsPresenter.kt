@@ -44,7 +44,7 @@ class ComparisonsPresenter : MvpPresenter<TestView>(), TestPresenter {
         state = TestPresenter.State.PREPARED
     }
 
-    private fun resetList() {
+    override fun resetList() {
         comparisonsAdapter.comparisons = ComparisonsRepository.getCardList()
         comparisonsAdapter.notifyDataSetChanged()
     }

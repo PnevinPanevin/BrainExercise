@@ -90,7 +90,7 @@ class ShapesPresenter : MvpPresenter<TestView>(), TestPresenter {
         viewState.scrollToPosition(++currentPosition)
     }
 
-    private fun resetList() {
+    override fun resetList() {
         shapesAdapter.shapeCardList = CardsRepository.getShapeCardList()
         shapesAdapter.notifyDataSetChanged()
     }

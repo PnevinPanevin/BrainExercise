@@ -3,20 +3,16 @@ package com.sharipov.brainexercise.presentation
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.sharipov.brainexercise.model.ExpressionsRepository
 import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.util.TestTimer
 import com.sharipov.brainexercise.util.formatAsTime
-import com.sharipov.brainexercise.view.activity_test.expressions.ExpressionsAdapter
 
 @InjectViewState
-class ExpressionsPresenter : MvpPresenter<TestView>(), TestPresenter {
-    private var score: Int = 0
-    private var currentPosition: Int = 0
+abstract class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
+    protected var score: Int = 0
+    protected var currentPosition: Int = 0
     lateinit var state: TestPresenter.State
-
-    val expressionsAdapter: ExpressionsAdapter = ExpressionsAdapter()
 
     private val countDownTimer: TestTimer =
         TestTimer(TestPresenter.FIRST_COUNTDOWN, TestPresenter.TICK_INTERVAL).apply {
@@ -42,11 +38,6 @@ class ExpressionsPresenter : MvpPresenter<TestView>(), TestPresenter {
 
         countDownTimer.start()
         state = TestPresenter.State.PREPARED
-    }
-
-    override fun resetList() {
-        expressionsAdapter.cardList = ExpressionsRepository.getCardList()
-        expressionsAdapter.notifyDataSetChanged()
     }
 
     override fun onPauseCountDown() {
@@ -83,28 +74,9 @@ class ExpressionsPresenter : MvpPresenter<TestView>(), TestPresenter {
         viewState.showFinishDialog(score)
     }
 
-    override fun <Int> checkAnswer(answer: Int) {
-        val currentScore = score
-        if (answer == expressionsAdapter.getAnswer(currentPosition))
-            score = currentScore + 1
-        else if (currentScore > 0)
-            score = currentScore - 1
+    abstract override fun <T> checkAnswer(answer: T)
 
-        viewState.updateScore(score)
-        viewState.scrollToPosition(++currentPosition)
-    }
-
-    override fun onLeaveTest() {
-        when (state) {
-            TestPresenter.State.STARTED -> {
-                onPauseTest()
-                state = TestPresenter.State.INTERRUPTED
-            }
-            TestPresenter.State.PREPARED -> onPauseCountDown()
-            else -> {}
-        }
-        viewState.showLeaveDialog(score)
-    }
+    abstract override fun resetList()
 
     override fun onFragmentPause() = when (state) {
         TestPresenter.State.STARTED -> {
@@ -119,5 +91,17 @@ class ExpressionsPresenter : MvpPresenter<TestView>(), TestPresenter {
         TestPresenter.State.DELAYED -> onRestartTest()
         TestPresenter.State.INTERRUPTED -> onResumeTest()
         else -> {}
+    }
+
+    override fun onLeaveTest() {
+        when (state) {
+            TestPresenter.State.STARTED -> {
+                onPauseTest()
+                state = TestPresenter.State.INTERRUPTED
+            }
+            TestPresenter.State.PREPARED -> onPauseCountDown()
+            else -> {}
+        }
+        viewState.showLeaveDialog(score)
     }
 }

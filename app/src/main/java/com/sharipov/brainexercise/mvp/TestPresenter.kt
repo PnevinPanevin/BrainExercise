@@ -22,4 +22,5 @@ interface TestPresenter {
     fun onFragmentPause()
     fun onFragmentResume()
     fun onLeaveTest()
+    fun resetList()
 }
