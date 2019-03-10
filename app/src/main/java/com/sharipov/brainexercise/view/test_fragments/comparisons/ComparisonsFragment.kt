@@ -10,7 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.ComparisonAnswer
+import com.sharipov.brainexercise.interractor.ResultInterractor
+import com.sharipov.brainexercise.model.repository.ComparisonAnswer
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.BasePresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
@@ -37,6 +38,7 @@ class ComparisonsFragment : MvpAppCompatFragment(),
             .apply {
                 setupRecyclerView(recyclerView)
                 dialogManager.onAttach(activity, presenter)
+                presenter.testName = ResultInterractor.COMPARISONS
             }
     }
 

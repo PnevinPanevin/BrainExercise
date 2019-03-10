@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.model
+package com.sharipov.brainexercise.model.repository
 
 import kotlin.random.Random
 
@@ -7,8 +7,10 @@ object ExpressionsRepository {
     private const val DIVISION_MULTIPLICATION_BOUNDS_INIT_VALUE = 5
     private const val ADDITION_SUBTRACTION_BOUNDS_INIT_VALUE = 15
 
-    private var divisionMultiplicationBounds: Int = DIVISION_MULTIPLICATION_BOUNDS_INIT_VALUE
-    private var additionSubtractionBounds: Int = ADDITION_SUBTRACTION_BOUNDS_INIT_VALUE
+    private var divisionMultiplicationBounds: Int =
+        DIVISION_MULTIPLICATION_BOUNDS_INIT_VALUE
+    private var additionSubtractionBounds: Int =
+        ADDITION_SUBTRACTION_BOUNDS_INIT_VALUE
 
     private val random: Random = Random.Default
     private val cardList = ArrayList<Expression>()
@@ -16,7 +18,9 @@ object ExpressionsRepository {
     fun getCardList(): List<Expression> {
         cardList.clear()
         for (i in 1..CARDS_QUANTITY) {
-            cardList += generate(random.nextInt(4))
+            cardList += generate(
+                random.nextInt(4)
+            )
         }
         return cardList
     }

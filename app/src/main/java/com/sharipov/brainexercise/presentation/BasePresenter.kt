@@ -3,6 +3,8 @@ package com.sharipov.brainexercise.presentation
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.sharipov.brainexercise.interractor.ResultInterractor
+import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.util.TestTimer
@@ -13,7 +15,11 @@ import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     protected var score: Int = 0
     protected var currentPosition: Int = 0
+    protected var totalAnswers: Int = 0
+    protected var wrongAnswers: Int = 0
     lateinit var state: TestPresenter.State
+
+    lateinit var testName: String
 
     lateinit var testAdapter: TestAdapter
 
@@ -29,6 +35,8 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
         }
 
     override fun onPrepareTest() {
+        totalAnswers = 0
+        wrongAnswers = 0
         score = 0
         currentPosition = 0
 
@@ -76,16 +84,20 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
         viewState.showFinishDialog(score)
     }
 
-    override fun <T> checkAnswer(answer: T){
+    override fun <T> checkAnswer(answer: T) {
         val currentScore = score
 
-        if (answer == testAdapter.getAnswer(currentPosition))
+        if (answer == testAdapter.getAnswer(currentPosition)) {
             score = currentScore + 1
-        else if (currentScore > 0)
+        }
+        else if (currentScore > 0) {
             score = currentScore - 1
-
+            wrongAnswers++
+        }
         viewState.updateScore(score)
         viewState.scrollToPosition(++currentPosition)
+
+        totalAnswers++
     }
 
     override fun resetList() = testAdapter.resetList()
@@ -115,5 +127,10 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
             else -> {}
         }
         viewState.showLeaveDialog(score)
+    }
+
+    override fun saveResults() {
+        val result = TestResult(testName, System.currentTimeMillis(), score, totalAnswers, wrongAnswers)
+        ResultInterractor.putResults(testName, result)
     }
 }

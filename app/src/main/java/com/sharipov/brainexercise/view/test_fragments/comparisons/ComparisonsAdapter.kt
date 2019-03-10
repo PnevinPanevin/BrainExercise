@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.Comparison
-import com.sharipov.brainexercise.model.ComparisonAnswer
-import com.sharipov.brainexercise.model.ComparisonsRepository
+import com.sharipov.brainexercise.model.repository.Comparison
+import com.sharipov.brainexercise.model.repository.ComparisonAnswer
+import com.sharipov.brainexercise.model.repository.ComparisonsRepository
 import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.fragment_comparisons_item.view.*
 

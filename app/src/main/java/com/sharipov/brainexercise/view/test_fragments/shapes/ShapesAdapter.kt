@@ -5,8 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.CardsRepository
-import com.sharipov.brainexercise.model.ShapeCard
+import com.sharipov.brainexercise.model.repository.CardsRepository
+import com.sharipov.brainexercise.model.repository.ShapeCard
 import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 import kotlinx.android.synthetic.main.shapes_card_item.view.*
 

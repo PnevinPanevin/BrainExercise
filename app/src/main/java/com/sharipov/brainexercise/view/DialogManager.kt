@@ -9,7 +9,6 @@ import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.mvp.TestPresenter
 
 class DialogManager {
-
     private var activity: FragmentActivity? = null
     private var presenter: TestPresenter? = null
 
@@ -38,7 +37,10 @@ class DialogManager {
         score,
         R.string.card_finish_dialog_title,
         R.string.card_pause_dialog_continue_button,
-        DialogInterface.OnClickListener { d, w -> activity?.finish() },
+        DialogInterface.OnClickListener { d, w ->
+            presenter?.saveResults()
+            activity?.findNavController(R.id.navHostFragment)?.navigate(R.id.exercisesFragment)
+        },
         R.string.card_dialog_button_restart_card_test,
         DialogInterface.OnClickListener { d, w -> presenter?.onRestartTest() }
     )

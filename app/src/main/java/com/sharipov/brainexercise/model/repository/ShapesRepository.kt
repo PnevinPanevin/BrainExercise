@@ -1,4 +1,4 @@
-package com.sharipov.brainexercise.model
+package com.sharipov.brainexercise.model.repository
 
 import com.sharipov.brainexercise.R
 import java.util.*
@@ -18,8 +18,14 @@ object CardsRepository {
             val cardType = random.nextInt(CARD_TYPE_QUANTITY)
             for (j in 0..newLineOfCards) {
                 val drawable = getCardShapeRes(cardType)
-                val answer = getAnswer(j, cardType, previousCardType)
-                cardList.add(ShapeCard(drawable, answer))
+                val answer =
+                    getAnswer(j, cardType, previousCardType)
+                cardList.add(
+                    ShapeCard(
+                        drawable,
+                        answer
+                    )
+                )
                 previousCardType = cardType
             }
         }
