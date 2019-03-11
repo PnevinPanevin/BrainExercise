@@ -1,7 +1,6 @@
 package com.sharipov.brainexercise.view
 
 import android.content.Context
-import android.content.SharedPreferences
 import android.os.Build
 import android.os.Bundle
 import android.view.View
@@ -11,7 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.interractor.ResultInterractor
+import com.sharipov.brainexercise.interactor.ResultInteractor
 import com.sharipov.brainexercise.mvp.TestView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -49,7 +48,7 @@ class MainActivity : MvpAppCompatActivity() {
                 .putString(USER_ID, userId)
                 .apply()
         }
-        ResultInterractor.userId = userId
+        ResultInteractor.userId = userId
     }
 
     private fun onMainDestinations() {

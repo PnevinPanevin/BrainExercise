@@ -1,9 +1,9 @@
-package com.sharipov.brainexercise.interractor
+package com.sharipov.brainexercise.interactor
 
 import com.google.firebase.database.FirebaseDatabase
 import com.sharipov.brainexercise.model.firebase.TestResult
 
-object ResultInterractor {
+object ResultInteractor {
     const val EXPRESSIONS = "EXPRESSIONS"
     const val COMPARISONS = "COMPARISONS"
     const val SHAPES = "SHAPES"

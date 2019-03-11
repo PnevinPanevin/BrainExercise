@@ -59,6 +59,6 @@ dependencies {
     implementation 'tech.schoolhelper:moxy-x-androidx:1.5.6'
     kapt 'tech.schoolhelper:moxy-x-compiler:1.5.6'
 
-    //RoundedImageView
-    implementation 'com.makeramen:roundedimageview:2.3.0'
+    //Charts
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 }

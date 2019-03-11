@@ -1,6 +1,5 @@
 package com.sharipov.brainexercise.view.test_fragments.shapes
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.interractor.ResultInterractor
+import com.sharipov.brainexercise.interactor.ResultInteractor
 import com.sharipov.brainexercise.model.repository.Answer
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.NBackPresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
-import com.sharipov.brainexercise.view.MainActivity
 import kotlinx.android.synthetic.main.fragment_shapes.*
 import kotlinx.android.synthetic.main.fragment_shapes.view.*
 import kotlinx.android.synthetic.main.time_and_score.*
@@ -40,7 +38,7 @@ class ShapesFragment : MvpAppCompatFragment(), TestView {
                 buttonYes.setOnClickListener { presenter.checkAnswer(Answer.YES) }
                 dialogManager.onAttach(activity, presenter)
 
-                presenter.testName = ResultInterractor.SHAPES
+                presenter.testName = ResultInteractor.SHAPES
             }
     }
 

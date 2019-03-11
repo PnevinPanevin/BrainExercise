@@ -3,7 +3,7 @@ package com.sharipov.brainexercise.presentation
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
-import com.sharipov.brainexercise.interractor.ResultInterractor
+import com.sharipov.brainexercise.interactor.ResultInteractor
 import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
@@ -14,6 +14,7 @@ import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 @InjectViewState
 open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     protected var score: Int = 0
+    protected var ratio: Int = 1
     protected var currentPosition: Int = 0
     protected var totalAnswers: Int = 0
     protected var wrongAnswers: Int = 0
@@ -85,13 +86,15 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     }
 
     override fun <T> checkAnswer(answer: T) {
-        val currentScore = score
-
         if (answer == testAdapter.getAnswer(currentPosition)) {
-            score = currentScore + 1
-        }
-        else if (currentScore > 0) {
-            score = currentScore - 1
+            score += 10 * ratio
+            if (ratio < 6) {
+                ratio++
+            }
+        } else {
+            if (ratio > 1) {
+                ratio--
+            }
             wrongAnswers++
         }
         viewState.updateScore(score)
@@ -131,6 +134,6 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
 
     override fun saveResults() {
         val result = TestResult(testName, System.currentTimeMillis(), score, totalAnswers, wrongAnswers)
-        ResultInterractor.putResults(testName, result)
+        ResultInteractor.putResults(testName, result)
     }
 }
