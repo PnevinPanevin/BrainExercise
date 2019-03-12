@@ -1,12 +1,18 @@
 package com.sharipov.brainexercise.view
 
+import android.app.ProgressDialog.show
 import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import com.sharipov.brainexercise.R
+import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
+import com.sharipov.brainexercise.view.dialog.FinishDialogFragment
+import kotlinx.android.synthetic.main.fragment_exercises_group_item.*
 
 class DialogManager {
     private var activity: FragmentActivity? = null
@@ -33,17 +39,32 @@ class DialogManager {
         DialogInterface.OnClickListener { d, w -> presenter?.onRestartTest() }
     )
 
-    fun showFinishDialog(score: Int) = showDialog(
-        score,
-        R.string.card_finish_dialog_title,
-        R.string.card_pause_dialog_continue_button,
-        DialogInterface.OnClickListener { d, w ->
-            presenter?.saveResults()
-            activity?.findNavController(R.id.navHostFragment)?.navigate(R.id.exercisesFragment)
-        },
-        R.string.card_dialog_button_restart_card_test,
-        DialogInterface.OnClickListener { d, w -> presenter?.onRestartTest() }
-    )
+    fun showFinishDialog(result: TestResult) {
+//        showDialog(
+//        score,
+//        R.string.card_finish_dialog_title,
+//        R.string.card_pause_dialog_continue_button,
+//        DialogInterface.OnClickListener { d, w ->
+//            presenter?.saveResults()
+//            activity?.findNavController(R.id.navHostFragment)?.navigate(R.id.exercisesFragment)
+//        },
+//        R.string.card_dialog_button_restart_card_test,
+//        DialogInterface.OnClickListener { d, w -> presenter?.onRestartTest() }
+//    )
+        val fragment = FinishDialogFragment().apply {
+            this.result = result
+            title = R.string.card_finish_dialog_title
+            positiveText = R.string.card_dialog_positive_button
+            positiveAction = {
+                presenter?.saveResults()
+                activity?.findNavController(R.id.navHostFragment)?.navigate(R.id.exercisesFragment)
+            }
+            negativeText = R.string.card_dialog_button_restart_card_test
+            negativeAction = { presenter?.onRestartTest() }
+        } as DialogFragment
+        fragment.show(activity?.supportFragmentManager, "Finish dialog")
+
+    }
 
     fun showLeaveDialog(score: Int) = showDialog(
         score,

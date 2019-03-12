@@ -11,6 +11,7 @@ import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.interactor.ResultInteractor
+import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.model.repository.ComparisonAnswer
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.BasePresenter
@@ -79,7 +80,7 @@ class ComparisonsFragment : MvpAppCompatFragment(),
 
     override fun showPauseDialog(score: Int) = dialogManager.showPauseDialog(score)
 
-    override fun showFinishDialog(score: Int) = dialogManager.showFinishDialog(score)
+    override fun showFinishDialog(result: TestResult) = dialogManager.showFinishDialog(result)
 
     override fun showLeaveDialog(score: Int) = dialogManager.showLeaveDialog(score)
 

@@ -82,7 +82,7 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
 
     override fun onFinishTest() {
         state = TestPresenter.State.FINISHED
-        viewState.showFinishDialog(score)
+        viewState.showFinishDialog(TestResult(testName, System.currentTimeMillis(), score, totalAnswers, wrongAnswers))
     }
 
     override fun <T> checkAnswer(answer: T) {

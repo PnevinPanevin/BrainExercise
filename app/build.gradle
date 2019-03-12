@@ -56,8 +56,8 @@ dependencies {
 
     //Moxy AndroidX
     //implementation 'tech.schoolhelper:moxy-x:1.5.6'
-    implementation 'tech.schoolhelper:moxy-x-androidx:1.5.6'
-    kapt 'tech.schoolhelper:moxy-x-compiler:1.5.6'
+    implementation 'tech.schoolhelper:moxy-x-androidx:1.5.7'
+    kapt 'tech.schoolhelper:moxy-x-compiler:1.5.7'
 
     //Charts
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
