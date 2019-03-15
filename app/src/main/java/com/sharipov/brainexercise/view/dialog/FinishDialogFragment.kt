@@ -59,7 +59,8 @@ class FinishDialogFragment : DialogFragment() {
 
         setDrawCenterText(true)
 
-        rotationAngle = 0F
+        maxAngle = 180F
+        rotationAngle = 180F
         isRotationEnabled = false
         isHighlightPerTapEnabled = false
 

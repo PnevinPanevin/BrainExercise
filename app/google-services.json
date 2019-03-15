@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "2249811823",
+    "firebase_url": "https://brain-exercise-924d0.firebaseio.com",
+    "project_id": "brain-exercise-924d0",
+    "storage_bucket": "brain-exercise-924d0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2249811823:android:aa77d19e5f4da82d",
+        "android_client_info": {
+          "package_name": "com.sharipov.brainexercise"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2249811823-jdjipli6do5qpufejfle1ihm209k1812.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sharipov.brainexercise",
+            "certificate_hash": "8298816e57ca969dd3a1e8efbb021ea55e769e08"
+          }
+        },
+        {
+          "client_id": "2249811823-0h5rrs0a3u6ov4uesggd4b35307v8v5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCaQxqZAmyTfwnlddnhvYwZR_fGYCirGJg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2249811823-0h5rrs0a3u6ov4uesggd4b35307v8v5m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
