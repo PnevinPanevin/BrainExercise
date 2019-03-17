@@ -1,13 +1,17 @@
-package com.sharipov.brainexercise.view.statistics
+package com.sharipov.brainexercise.view.test_details
 
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.YAxis
@@ -16,36 +20,49 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.sharipov.brainexercise.interactor.ResultInteractor
-import com.sharipov.brainexercise.mvp.StatisticsView
+import com.google.android.material.snackbar.Snackbar
+import com.sharipov.brainexercise.R
+import com.sharipov.brainexercise.model.firebase.CategoryItem
+import com.sharipov.brainexercise.model.firebase.TestType
+import com.sharipov.brainexercise.mvp.TestDetailsView
 import com.sharipov.brainexercise.view.hide
 import com.sharipov.brainexercise.view.show
-import kotlinx.android.synthetic.main.fragment_statistics.*
-import kotlinx.android.synthetic.main.fragment_statistics.view.*
+import com.sharipov.brainexercise.view.statistics.DateXAxisFormatter
+import kotlinx.android.synthetic.main.fragment_test_details.*
+import kotlinx.android.synthetic.main.fragment_test_details.view.*
 import java.util.*
 
-
-class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
+class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     companion object {
-        const val TAG = "StatisticsFragment"
-        const val EXPRESSIONS = "EXPRESSIONS"
+        const val TEST_DETAILS = "TEST_DETAILS"
     }
 
-    private val resultInteractor = ResultInteractor().apply { userId = ResultInteractor.USER_ID }
+    @InjectPresenter
+    lateinit var presenter: TestDetailsPresenter
+
+    lateinit var navController: NavController
+    private lateinit var testDetails: CategoryItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(com.sharipov.brainexercise.R.layout.fragment_statistics, container, false)
-            .apply {
-                setupLineChart(chart)
-                resultInteractor.getResults(
-                    EXPRESSIONS,
-                    { showResults(it) },
-                    { Log.d(TAG, it.message) }
-                )
-            }
+        navController = findNavController()
+        testDetails = arguments?.getSerializable(TEST_DETAILS) as CategoryItem
+        return inflater.inflate(R.layout.fragment_test_details, container, false).apply {
+            collapsingToolbar.setupWithNavController(toolbar, navController)
+            collapsingToolbar.isTitleEnabled = true
+            collapsingToolbar.title = testDetails.title
+            toolbar.title = testDetails.title
+            //collapsingToolbar.title = testDetails.title
+//            Picasso.get()
+//                .load(testDetails.image)
+//                .into(imageView)
+            descriptionTextView.text = testDetails.description
+            startButton.setOnClickListener { navController.navigate(getNavId(testDetails.type)) }
+            setupLineChart(chart)
+            getStatistics()
+        }
     }
 
     private fun setupLineChart(chart: LineChart) {
@@ -88,7 +105,13 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
         rightAxis.isEnabled = false
     }
 
-    fun showResults(entries: List<Entry>) {
+    private fun getNavId(type: TestType) = when (type) {
+        TestType.EXPRESSIONS -> R.id.action_testDetailsFragment_to_expressionsFragment
+        TestType.COMPARISONS -> R.id.action_testDetailsFragment_to_comparisonsFragment
+        TestType.SHAPES -> R.id.action_testDetailsFragment_to_shapesFragment
+    }
+
+    override fun showStatistics(entries: List<Entry>) {
         val set = LineDataSet(entries, "Data Set")
         with(set) {
             axisDependency = YAxis.AxisDependency.LEFT
@@ -114,6 +137,13 @@ class StatisticsFragment : MvpAppCompatFragment(), StatisticsView {
             moveViewToX(data.entryCount.toFloat())
         }
     }
+
+    override fun showError(message: String) =
+        Snackbar.make(scrollView, message, Snackbar.LENGTH_SHORT)
+            .setAction("Повторить") { getStatistics() }
+            .show()
+
+    private fun getStatistics() = presenter.getStatistics(testDetails.type.name)
 
     override fun showProgress() = progressBar.show()
 

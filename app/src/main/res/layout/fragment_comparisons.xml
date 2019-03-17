@@ -10,6 +10,8 @@
 
     <include layout="@layout/count_down_text_view"/>
 
+    <include layout="@layout/hint_text_view"/>
+
     <com.sharipov.brainexercise.util.LockableRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

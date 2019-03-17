@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.util.Category
+import com.sharipov.brainexercise.model.firebase.Category
 import kotlinx.android.synthetic.main.fragment_exercises_group_item.view.*
 
 class CategoryListAdapter(private val categoryList: List<Category>) :

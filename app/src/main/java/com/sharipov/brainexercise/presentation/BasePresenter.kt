@@ -4,6 +4,7 @@ import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.sharipov.brainexercise.interactor.ResultInteractor
+import com.sharipov.brainexercise.interactor.ResultInteractor.Companion.USER_ID
 import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
@@ -19,10 +20,9 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     protected var totalAnswers: Int = 0
     protected var wrongAnswers: Int = 0
     lateinit var state: TestPresenter.State
-
     lateinit var testName: String
-
     lateinit var testAdapter: TestAdapter
+    private val resultInteractor = ResultInteractor().apply { userId = ResultInteractor.USER_ID }
 
     private val countDownTimer: TestTimer =
         TestTimer(TestPresenter.FIRST_COUNTDOWN, TestPresenter.TICK_INTERVAL).apply {
@@ -134,6 +134,6 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
 
     override fun saveResults() {
         val result = TestResult(testName, System.currentTimeMillis(), score, totalAnswers, wrongAnswers)
-        ResultInteractor.putResults(testName, result)
+        resultInteractor.putResults(testName, result)
     }
 }

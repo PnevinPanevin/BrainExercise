@@ -4,13 +4,24 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.presenter.InjectPresenter
+import com.google.android.material.snackbar.Snackbar
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.util.Util
+import com.sharipov.brainexercise.model.firebase.Category
+import com.sharipov.brainexercise.mvp.ExercisesView
+import com.sharipov.brainexercise.presentation.ExercisesPresenter
 import kotlinx.android.synthetic.main.fragment_exercises.*
 
-class ExercisesFragment : Fragment() {
+class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
+    companion object {
+        const val TAG = "ExercisesFragment"
+    }
+
+    @InjectPresenter
+    lateinit var presenter: ExercisesPresenter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -20,10 +31,16 @@ class ExercisesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(listExercisesRecyclerView) {
-            adapter = CategoryListAdapter(Util.getCategories())
-            layoutManager = LinearLayoutManager(context)
-            //addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
-        }
+        presenter.getCategories()
     }
+
+    override fun showCategories(categories: List<Category>) = listExercisesRecyclerView.run {
+        adapter = CategoryListAdapter(categories)
+        layoutManager = LinearLayoutManager(context)
+    }
+
+    override fun showError(message: String) =
+        Snackbar.make(container, message, Snackbar.LENGTH_SHORT)
+            .setAction("Повторить") { presenter.getCategories() }
+            .show()
 }

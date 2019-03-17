@@ -50,4 +50,7 @@
     <string name="button_return">\u23CE</string>
     <string name="button_0">0</string>
     <string name="button_backspace">\u232B</string>
+    <string name="hint_shapes">Совпадает ли текущая форма с предыдущей?</string>
+    <string name="statistics">Статистика</string>
+    <string name="start">Начать</string>
 </resources>

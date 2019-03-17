@@ -1,0 +1,17 @@
+package com.sharipov.brainexercise.presentation
+
+import com.arellomobile.mvp.InjectViewState
+import com.arellomobile.mvp.MvpPresenter
+import com.sharipov.brainexercise.interactor.CategoriesInteractor
+import com.sharipov.brainexercise.mvp.ExercisesView
+
+@InjectViewState
+class ExercisesPresenter : MvpPresenter<ExercisesView>() {
+
+    private val interactor = CategoriesInteractor()
+
+    fun getCategories() = interactor.getCategories(
+        { viewState.showError(it.message) },
+        { viewState.showCategories(it) }
+    )
+}

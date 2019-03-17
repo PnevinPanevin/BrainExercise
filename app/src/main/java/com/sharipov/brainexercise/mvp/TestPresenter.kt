@@ -2,7 +2,7 @@ package com.sharipov.brainexercise.mvp
 
 interface TestPresenter {
     companion object CONST {
-        const val TEST_DURATION = 30000L
+        const val TEST_DURATION = 8000L
         const val FIRST_COUNTDOWN = 4000L
         const val TICK_INTERVAL = 200L;
     }

@@ -10,34 +10,20 @@ import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.interactor.ResultInteractor
 import com.sharipov.brainexercise.mvp.TestView
 import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : MvpAppCompatActivity() {
     private val USER_ID = "USER_ID"
-
     private lateinit var userId: String
-
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
 
         navController = Navigation.findNavController(this, R.id.navHostFragment)
-
-        bottomNavigation.setupWithNavController(navController)
-        NavigationUI.setupWithNavController(toolbar, navController, null)
-
-        navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when (destination.id) {
-                R.id.helpFragment, R.id.exercisesFragment, R.id.statisticsFragment -> onMainDestinations()
-                R.id.shapesFragment, R.id.expressionsFragment, R.id.comparisonsFragment -> onTestStarted()
-            }
-        }
 
         val prefs = this.getSharedPreferences(packageName, Context.MODE_PRIVATE)
         if (prefs.contains(USER_ID)) {
@@ -48,17 +34,6 @@ class MainActivity : MvpAppCompatActivity() {
                 .putString(USER_ID, userId)
                 .apply()
         }
-        ResultInteractor.userId = userId
-    }
-
-    private fun onMainDestinations() {
-        bottomNavigation.show()
-        toolbar.show()
-    }
-
-    private fun onTestStarted() {
-        toolbar.hide()
-        bottomNavigation.hide()
     }
 
     override fun onBackPressed() {
