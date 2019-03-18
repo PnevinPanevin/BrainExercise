@@ -20,6 +20,7 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.firebase.CategoryItem
@@ -50,11 +51,11 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         navController = findNavController()
         testDetails = arguments?.getSerializable(TEST_DETAILS) as CategoryItem
         return inflater.inflate(R.layout.fragment_test_details, container, false).apply {
+
             collapsingToolbar.setupWithNavController(toolbar, navController)
-            collapsingToolbar.isTitleEnabled = true
+            //collapsingToolbar.isTitleEnabled = false
             collapsingToolbar.title = testDetails.title
             toolbar.title = testDetails.title
-            //collapsingToolbar.title = testDetails.title
 //            Picasso.get()
 //                .load(testDetails.image)
 //                .into(imageView)
