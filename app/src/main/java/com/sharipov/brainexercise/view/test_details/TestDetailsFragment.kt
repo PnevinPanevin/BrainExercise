@@ -2,6 +2,7 @@ package com.sharipov.brainexercise.view.test_details
 
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
+import com.devs.readmoreoption.ReadMoreOption
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.components.YAxis
@@ -51,13 +53,11 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         navController = findNavController()
         testDetails = arguments?.getSerializable(TEST_DETAILS) as CategoryItem
         return inflater.inflate(R.layout.fragment_test_details, container, false).apply {
-
             collapsingToolbar.setupWithNavController(toolbar, navController)
             collapsingToolbar.title = testDetails.title
             Picasso.get()
                 .load(testDetails.image)
                 .into(imageView)
-            descriptionTextView.text = testDetails.description
             startButton.setOnClickListener {
                 navController.navigate(
                     getNavId(testDetails.type),
@@ -67,6 +67,16 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
             setupLineChart(chart)
             getStatistics()
 
+            ReadMoreOption.Builder(activity)
+                .textLength(6, ReadMoreOption.TYPE_LINE)
+                .moreLabel("Читать дальше")
+                .lessLabel("Скрыть")
+                .moreLabelColor(Color.BLUE)
+                .lessLabelColor(Color.BLUE)
+                .labelUnderLine(true)
+                .expandAnimation(true)
+                .build()
+                .addReadMoreTo(descriptionTextView, Html.fromHtml(testDetails.description))
         }
     }
 
