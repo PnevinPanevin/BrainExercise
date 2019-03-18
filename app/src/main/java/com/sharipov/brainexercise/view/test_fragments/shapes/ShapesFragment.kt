@@ -1,6 +1,7 @@
 package com.sharipov.brainexercise.view.test_fragments.shapes
 
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,12 +17,13 @@ import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.NBackPresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.view.DialogManager
+import com.sharipov.brainexercise.view.test_details.TestDetailsFragment.Companion.HINT
 import kotlinx.android.synthetic.main.fragment_shapes.*
 import kotlinx.android.synthetic.main.fragment_shapes.view.*
+import kotlinx.android.synthetic.main.hint_text_view.view.*
 import kotlinx.android.synthetic.main.time_and_score.*
 
 class ShapesFragment : MvpAppCompatFragment(), TestView {
-
     @InjectPresenter
     lateinit var presenter: NBackPresenter
 
@@ -40,6 +42,7 @@ class ShapesFragment : MvpAppCompatFragment(), TestView {
                 dialogManager.onAttach(activity, presenter)
 
                 presenter.testName = ResultInteractor.SHAPES
+                hintTextView.text = arguments?.getString(HINT)
             }
     }
 

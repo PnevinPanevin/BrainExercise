@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -19,7 +19,6 @@ import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
-import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.google.android.material.snackbar.Snackbar
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.firebase.CategoryItem
@@ -36,6 +35,7 @@ import java.util.*
 class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     companion object {
         const val TEST_DETAILS = "TEST_DETAILS"
+        const val HINT = "HINT"
     }
 
     @InjectPresenter
@@ -54,14 +54,19 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
 
             collapsingToolbar.setupWithNavController(toolbar, navController)
             collapsingToolbar.title = testDetails.title
-
             Picasso.get()
                 .load(testDetails.image)
                 .into(imageView)
             descriptionTextView.text = testDetails.description
-            startButton.setOnClickListener { navController.navigate(getNavId(testDetails.type)) }
+            startButton.setOnClickListener {
+                navController.navigate(
+                    getNavId(testDetails.type),
+                    bundleOf(HINT to testDetails.hint)
+                )
+            }
             setupLineChart(chart)
             getStatistics()
+
         }
     }
 
