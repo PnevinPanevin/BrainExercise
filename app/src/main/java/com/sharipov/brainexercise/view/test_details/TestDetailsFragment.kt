@@ -1,6 +1,5 @@
 package com.sharipov.brainexercise.view.test_details
 
-
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,6 +28,7 @@ import com.sharipov.brainexercise.mvp.TestDetailsView
 import com.sharipov.brainexercise.view.hide
 import com.sharipov.brainexercise.view.show
 import com.sharipov.brainexercise.view.statistics.DateXAxisFormatter
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_test_details.*
 import kotlinx.android.synthetic.main.fragment_test_details.view.*
 import java.util.*
@@ -53,12 +53,11 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         return inflater.inflate(R.layout.fragment_test_details, container, false).apply {
 
             collapsingToolbar.setupWithNavController(toolbar, navController)
-            //collapsingToolbar.isTitleEnabled = false
             collapsingToolbar.title = testDetails.title
-            toolbar.title = testDetails.title
-//            Picasso.get()
-//                .load(testDetails.image)
-//                .into(imageView)
+
+            Picasso.get()
+                .load(testDetails.image)
+                .into(imageView)
             descriptionTextView.text = testDetails.description
             startButton.setOnClickListener { navController.navigate(getNavId(testDetails.type)) }
             setupLineChart(chart)

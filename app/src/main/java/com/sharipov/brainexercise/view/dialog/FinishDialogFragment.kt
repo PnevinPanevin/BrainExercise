@@ -40,7 +40,7 @@ class FinishDialogFragment : DialogFragment() {
     private fun initChart(chart: PieChart) = with(chart) {
         setUsePercentValues(true)
         description.isEnabled = false
-        setExtraOffsets(5F, 20F, 50F, 5F)
+        setExtraOffsets(5F, 30F, 30F, 5F)
 
         dragDecelerationFrictionCoef = 0.95f
 

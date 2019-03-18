@@ -28,9 +28,9 @@ class CategoryItemAdapter(val itemList: List<CategoryItem>) :
         with(holder.itemView) {
             val currentItem = itemList[position]
             textView.text = currentItem.title
-//            Picasso.get()
-//                .load(currentItem.image)
-//                .into(imageView)
+            Picasso.get()
+                .load(currentItem.image)
+                .into(imageView)
             setOnClickListener {
                 val action = R.id.action_exercisesFragment_to_testDetailsFragment
                 val args = bundleOf(TestDetailsFragment.TEST_DETAILS to currentItem)
