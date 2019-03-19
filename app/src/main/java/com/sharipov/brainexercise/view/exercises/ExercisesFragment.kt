@@ -14,6 +14,8 @@ import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.firebase.Exercise
 import com.sharipov.brainexercise.mvp.ExercisesView
 import com.sharipov.brainexercise.presentation.ExercisesPresenter
+import com.sharipov.brainexercise.view.hide
+import com.sharipov.brainexercise.view.show
 import kotlinx.android.synthetic.main.fragment_exercises.*
 import kotlinx.android.synthetic.main.fragment_exercises.view.*
 
@@ -48,4 +50,8 @@ class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
         Snackbar.make(container, message, Snackbar.LENGTH_SHORT)
             .setAction("Повторить") { presenter.getCategories() }
             .show()
+
+    override fun showProgress() = progressBar.show()
+
+    override fun hideProgress() = progressBar.hide()
 }

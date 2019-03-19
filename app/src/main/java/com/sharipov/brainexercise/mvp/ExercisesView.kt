@@ -6,7 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import com.sharipov.brainexercise.model.firebase.Exercise
 
 @StateStrategyType(AddToEndSingleStrategy::class)
-interface ExercisesView: MvpView {
+interface ExercisesView: MvpView, ProgressView {
     fun showCategories(categories: List<Exercise>)
     fun showError(message: String)
 }

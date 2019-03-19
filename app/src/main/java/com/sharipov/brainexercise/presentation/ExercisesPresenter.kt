@@ -10,8 +10,17 @@ class ExercisesPresenter : MvpPresenter<ExercisesView>() {
 
     private val interactor = CategoriesInteractor()
 
-    fun getCategories() = interactor.getCategories(
-        { viewState.showError(it.message) },
-        { viewState.showCategories(it) }
-    )
+    fun getCategories() {
+        viewState.showProgress()
+        interactor.getCategories(
+            {
+                viewState.hideProgress()
+                viewState.showError(it.message)
+            },
+            {
+                viewState.hideProgress()
+                viewState.showCategories(it)
+            }
+        )
+    }
 }

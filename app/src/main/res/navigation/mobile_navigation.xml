@@ -4,9 +4,11 @@
             xmlns:tools="http://schemas.android.com/tools" android:id="@+id/mobile_navigation.xml"
             app:startDestination="@id/exercisesFragment">
 
-    <fragment android:id="@+id/exercisesFragment"
-              android:name="com.sharipov.brainexercise.view.exercises.ExercisesFragment"
-              android:label="fragment_exercises" tools:layout="@layout/fragment_exercises">
+    <fragment
+        android:id="@+id/exercisesFragment"
+        android:name="com.sharipov.brainexercise.view.exercises.ExercisesFragment"
+        android:label="Brain Exercise"
+        tools:layout="@layout/fragment_exercises">
         <action
             android:id="@+id/action_exercisesFragment_to_testDetailsFragment"
             app:destination="@id/testDetailsFragment" />
