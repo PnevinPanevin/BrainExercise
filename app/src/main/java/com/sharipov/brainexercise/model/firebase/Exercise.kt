@@ -2,7 +2,7 @@ package com.sharipov.brainexercise.model.firebase
 
 import java.io.Serializable
 
-data class CategoryItem(
+data class Exercise(
     var title: String = "",
     var image: String = "",
     var description: String = "",

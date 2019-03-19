@@ -23,7 +23,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.github.mikephil.charting.utils.ColorTemplate
 import com.google.android.material.snackbar.Snackbar
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.firebase.CategoryItem
+import com.sharipov.brainexercise.model.firebase.Exercise
 import com.sharipov.brainexercise.model.firebase.TestType
 import com.sharipov.brainexercise.mvp.TestDetailsView
 import com.sharipov.brainexercise.view.hide
@@ -44,14 +44,14 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     lateinit var presenter: TestDetailsPresenter
 
     lateinit var navController: NavController
-    private lateinit var testDetails: CategoryItem
+    private lateinit var testDetails: Exercise
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         navController = findNavController()
-        testDetails = arguments?.getSerializable(TEST_DETAILS) as CategoryItem
+        testDetails = arguments?.getSerializable(TEST_DETAILS) as Exercise
         return inflater.inflate(R.layout.fragment_test_details, container, false).apply {
             collapsingToolbar.setupWithNavController(toolbar, navController)
             collapsingToolbar.title = testDetails.title
@@ -95,14 +95,13 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
 
         chart.data = data // add empty data
 
-        val legend = chart.legend // get the legend (only possible after setting data)
-        with(legend) {
+        // get the legend (only possible after setting data)
+        with(chart.legend) {
             form = Legend.LegendForm.LINE
             textColor = Color.BLACK
         }
 
-        val xl = chart.xAxis
-        with(xl) {
+        with(chart.xAxis) {
             textColor = Color.BLACK
             valueFormatter = DateXAxisFormatter()
             isEnabled = true
@@ -110,8 +109,7 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
             setAvoidFirstLastClipping(true)
         }
 
-        val leftAxis = chart.axisLeft
-        with(leftAxis) {
+        with(chart.axisLeft) {
             textColor = Color.BLACK
             setDrawGridLines(true)
         }
@@ -124,6 +122,7 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         TestType.EXPRESSIONS -> R.id.action_testDetailsFragment_to_expressionsFragment
         TestType.COMPARISONS -> R.id.action_testDetailsFragment_to_comparisonsFragment
         TestType.SHAPES -> R.id.action_testDetailsFragment_to_shapesFragment
+        else -> -1
     }
 
     override fun showStatistics(entries: List<Entry>) {

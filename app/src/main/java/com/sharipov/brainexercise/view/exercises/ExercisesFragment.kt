@@ -4,15 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.material.snackbar.Snackbar
 import com.sharipov.brainexercise.R
-import com.sharipov.brainexercise.model.firebase.Category
+import com.sharipov.brainexercise.model.firebase.Exercise
 import com.sharipov.brainexercise.mvp.ExercisesView
 import com.sharipov.brainexercise.presentation.ExercisesPresenter
 import kotlinx.android.synthetic.main.fragment_exercises.*
+import kotlinx.android.synthetic.main.fragment_exercises.view.*
 
 class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
     companion object {
@@ -26,7 +29,9 @@ class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_exercises, container, false)
+        return inflater.inflate(R.layout.fragment_exercises, container, false).apply {
+            toolbar.setupWithNavController(findNavController())
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,8 +39,8 @@ class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
         presenter.getCategories()
     }
 
-    override fun showCategories(categories: List<Category>) = listExercisesRecyclerView.run {
-        adapter = CategoryListAdapter(categories)
+    override fun showCategories(categories: List<Exercise>) = listExercisesRecyclerView.run {
+        adapter = ExerciseAdapter(categories)
         layoutManager = LinearLayoutManager(context)
     }
 
