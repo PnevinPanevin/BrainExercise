@@ -25,7 +25,8 @@ class ExerciseAdapter(private val itemList: List<Exercise>) : RecyclerView.Adapt
     override fun onBindViewHolder(holder: ExerciseHolder, position: Int) =
         with(holder.itemView) {
             val currentItem = itemList[position]
-            textView.text = currentItem.title
+            testNameTextView.text = currentItem.title
+            categoryTextView.text = currentItem.category
             Picasso.get()
                 .load(currentItem.image)
                 .into(imageView)
