@@ -6,103 +6,27 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <LinearLayout
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+        android:id="@+id/answerTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp">
+        android:gravity="center"
+        android:padding="8dp"
+        android:textSize="32sp"
+        tools:text="0" />
 
-        <TextView
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/answer" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
 
-        <TextView
-            android:id="@+id/answerTextView"
-            style="@style/TextAppearance.AppCompat.Display1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="0" />
-    </LinearLayout>
-
-    <androidx.gridlayout.widget.GridLayout
-        android:id="@+id/gridLayout"
+    <com.sharipov.brainexercise.util.MaterialNumberpad
+        android:id="@+id/numPad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:columnCount="3">
-
-        <Button
-            android:id="@+id/button_7"
-            android:text="@string/button_7"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_8"
-            android:text="@string/button_8"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_9"
-            android:text="@string/button_9"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_4"
-            android:text="@string/button_4"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_5"
-            android:text="@string/button_5"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_6"
-            android:text="@string/button_6"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_1"
-            android:text="@string/button_1"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_2"
-            android:text="@string/button_2"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_3"
-            android:text="@string/button_3"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_backspace"
-            android:text="@string/button_backspace"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_0"
-            android:text="@string/button_0"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-
-        <Button
-            android:id="@+id/button_return"
-            android:text="@string/button_return"
-            app:layout_columnWeight="1"
-            app:layout_gravity="fill" />
-    </androidx.gridlayout.widget.GridLayout>
+        app:mnp_show_done_action="true"
+        app:mnp_text_color="@android:color/darker_gray" />
 </LinearLayout>

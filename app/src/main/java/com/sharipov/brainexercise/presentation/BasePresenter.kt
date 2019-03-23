@@ -23,6 +23,7 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     lateinit var state: TestPresenter.State
     lateinit var testName: String
     lateinit var testAdapter: TestAdapter
+
     private val resultInteractor = ResultInteractor().apply {
         userId = auth.currentUser?.uid ?: ResultInteractor.USER_ID
     }
@@ -114,15 +115,13 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
             viewState.showPauseDialog(score)
         }
         TestPresenter.State.PREPARED -> onPauseCountDown()
-        else -> {
-        }
+        else -> {}
     }
 
     override fun onFragmentResume() = when (state) {
         TestPresenter.State.DELAYED -> onRestartTest()
         TestPresenter.State.INTERRUPTED -> onResumeTest()
-        else -> {
-        }
+        else -> {}
     }
 
     override fun onLeaveTest() {
@@ -132,8 +131,7 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
                 state = TestPresenter.State.INTERRUPTED
             }
             TestPresenter.State.PREPARED -> onPauseCountDown()
-            else -> {
-            }
+            else -> {}
         }
         viewState.showLeaveDialog(score)
     }

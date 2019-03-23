@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/countDownLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".view.test_fragments.progressions.ProgressionsFragment">
+
+    <TextView
+        android:id="@+id/countDownTextView"
+        style="@style/TextAppearance.AppCompat.Display3"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        tools:text="3"
+        tools:visibility="visible" />
+
+    <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/timeAndScoreLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal"
+            android:padding="12dp">
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/time_left" />
+
+            <TextView
+                android:id="@+id/timeLeftTextView"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/score" />
+
+            <TextView
+                android:id="@+id/scoreTextView"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/hintTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeAndScoreLayout"
+            android:layout_margin="16dp"
+            android:gravity="center"
+            android:textSize="18sp"
+            tools:text="Подсказка о том, что нужно делать в этом тесте" />
+
+        <com.sharipov.brainexercise.util.LockableRecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/mathInputLayout"
+            android:layout_below="@id/hintTextView"
+            android:layout_margin="8dp"
+            tools:listitem="@layout/fragment_comparisons_item" />
+
+        <LinearLayout
+            android:id="@+id/mathInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <TextView
+                android:id="@+id/answerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textSize="32sp"
+                tools:text="0" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp" />
+
+            <com.sharipov.brainexercise.util.MaterialNumberpad
+                android:id="@+id/numPad"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mnp_show_done_action="true"
+                app:mnp_text_color="@android:color/darker_gray" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

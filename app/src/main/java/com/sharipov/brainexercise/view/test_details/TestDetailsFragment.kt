@@ -122,6 +122,7 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         TestType.EXPRESSIONS -> R.id.action_testDetailsFragment_to_expressionsFragment
         TestType.COMPARISONS -> R.id.action_testDetailsFragment_to_comparisonsFragment
         TestType.SHAPES -> R.id.action_testDetailsFragment_to_shapesFragment
+        TestType.PROGRESSIONS -> R.id.action_testDetailsFragment_to_progressionsFragment
         else -> -1
     }
 

@@ -1,7 +1,6 @@
 package com.sharipov.brainexercise.view.test_fragments.shapes
 
 import android.os.Bundle
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

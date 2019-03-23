@@ -11,6 +11,7 @@ class ResultInteractor {
     companion object {
         const val EXPRESSIONS = "EXPRESSIONS"
         const val COMPARISONS = "COMPARISONS"
+        const val PROGRESSIONS = "PROGRESSIONS"
         const val SHAPES = "SHAPES"
         const val USER_ID = "DEFAULT_USER"
         const val RESULTS = "results"

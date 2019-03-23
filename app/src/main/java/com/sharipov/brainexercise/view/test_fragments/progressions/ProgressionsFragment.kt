@@ -1,4 +1,5 @@
-package com.sharipov.brainexercise.view.test_fragments.expressions
+package com.sharipov.brainexercise.view.test_fragments.progressions
+
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,32 +12,31 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.interactor.ResultInteractor
 import com.sharipov.brainexercise.model.firebase.TestResult
+import com.sharipov.brainexercise.model.repository.ProgressionsRepository
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.BasePresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.util.MaterialNumberpad
 import com.sharipov.brainexercise.view.DialogManager
-import kotlinx.android.synthetic.main.fragment_expressions.*
-import kotlinx.android.synthetic.main.fragment_expressions.view.*
-import kotlinx.android.synthetic.main.math_input.*
-import kotlinx.android.synthetic.main.math_input.view.*
-import kotlinx.android.synthetic.main.time_and_score.*
+import com.sharipov.brainexercise.view.test_details.TestDetailsFragment
+import kotlinx.android.synthetic.main.fragment_progressions.*
+import kotlinx.android.synthetic.main.fragment_progressions.view.*
 
-class ExpressionsFragment : MvpAppCompatFragment(), TestView {
+class ProgressionsFragment : MvpAppCompatFragment(), TestView {
     @InjectPresenter
     lateinit var presenter: BasePresenter
 
-    private val dialogManager = DialogManager()
+    private val dialogManager: DialogManager = DialogManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_expressions, container, false)
+        return inflater.inflate(R.layout.fragment_progressions, container, false)
             .apply {
                 answerTextView.text = "0"
                 numPad.setOnNumpadClickListener {
-                    when (it) {
+                    when(it){
                         MaterialNumberpad.BUTTON_ACTION_DONE -> onReturnPressed()
                         MaterialNumberpad.BUTTON_ACTION_DELETE -> onBackspacePressed()
                         MaterialNumberpad.BUTTON_0 -> onZeroPressed()
@@ -45,12 +45,13 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView {
                 }
                 setupRecyclerView(recyclerView)
                 dialogManager.onAttach(activity, presenter)
-                presenter.testName = ResultInteractor.EXPRESSIONS
+                presenter.testName = ResultInteractor.PROGRESSIONS
+                hintTextView.text = arguments?.getString(TestDetailsFragment.HINT)
             }
     }
 
     private fun onReturnPressed() {
-        presenter.checkAnswer(answerTextView.text.toString().toInt())
+        presenter.checkAnswer(answerTextView.text.toString())
         answerTextView.text = "0"
     }
 
@@ -79,13 +80,15 @@ class ExpressionsFragment : MvpAppCompatFragment(), TestView {
     }
 
     private fun setupRecyclerView(recyclerView: LockableRecyclerView) = with(recyclerView) {
-        val expressionsAdapter = ExpressionsAdapter()
-        presenter.testAdapter = expressionsAdapter
-        adapter = expressionsAdapter
+        val progressionsAdapter = ProgressionsAdapter()
+            .apply { progressions = ProgressionsRepository.getProgressions() }
+        presenter.testAdapter = progressionsAdapter
+        adapter = progressionsAdapter
         layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)
         isLocked = true
         hasFixedSize()
     }
+
 
     override fun updateTime(timeLeft: String) {
         timeLeftTextView.text = timeLeft
