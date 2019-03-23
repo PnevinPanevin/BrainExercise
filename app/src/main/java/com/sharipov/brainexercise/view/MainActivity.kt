@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : MvpAppCompatActivity() {
-    private val USER_ID = "USER_ID"
-    private lateinit var userId: String
     private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,16 +22,6 @@ class MainActivity : MvpAppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         navController = Navigation.findNavController(this, R.id.navHostFragment)
-
-        val prefs = this.getSharedPreferences(packageName, Context.MODE_PRIVATE)
-        if (prefs.contains(USER_ID)) {
-            userId = prefs.getString(USER_ID, "") as String
-        } else {
-            userId = "${Build.MANUFACTURER}${Build.MODEL}${System.currentTimeMillis()}"
-            prefs.edit()
-                .putString(USER_ID, userId)
-                .apply()
-        }
     }
 
     override fun onBackPressed() {

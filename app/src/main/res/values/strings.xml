@@ -53,4 +53,5 @@
     <string name="hint_shapes">Совпадает ли текущая форма с предыдущей?</string>
     <string name="statistics">Статистика</string>
     <string name="start">Начать</string>
+    <string name="not_enough_data">Не достаточно данных для отображения статистики. Вам нужно пройти тест минимум 3 раза.</string>
 </resources>

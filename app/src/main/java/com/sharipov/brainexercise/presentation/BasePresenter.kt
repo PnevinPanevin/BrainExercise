@@ -3,8 +3,8 @@ package com.sharipov.brainexercise.presentation
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
+import com.google.firebase.auth.FirebaseAuth
 import com.sharipov.brainexercise.interactor.ResultInteractor
-import com.sharipov.brainexercise.interactor.ResultInteractor.Companion.USER_ID
 import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
 import com.sharipov.brainexercise.mvp.TestView
@@ -14,6 +14,7 @@ import com.sharipov.brainexercise.view.test_fragments.TestAdapter
 
 @InjectViewState
 open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
+    private val auth = FirebaseAuth.getInstance()
     protected var score: Int = 0
     protected var ratio: Int = 1
     protected var currentPosition: Int = 0
@@ -22,7 +23,9 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
     lateinit var state: TestPresenter.State
     lateinit var testName: String
     lateinit var testAdapter: TestAdapter
-    private val resultInteractor = ResultInteractor().apply { userId = ResultInteractor.USER_ID }
+    private val resultInteractor = ResultInteractor().apply {
+        userId = auth.currentUser?.uid ?: ResultInteractor.USER_ID
+    }
 
     private val countDownTimer: TestTimer =
         TestTimer(TestPresenter.FIRST_COUNTDOWN, TestPresenter.TICK_INTERVAL).apply {
@@ -111,13 +114,15 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
             viewState.showPauseDialog(score)
         }
         TestPresenter.State.PREPARED -> onPauseCountDown()
-        else -> {}
+        else -> {
+        }
     }
 
     override fun onFragmentResume() = when (state) {
         TestPresenter.State.DELAYED -> onRestartTest()
         TestPresenter.State.INTERRUPTED -> onResumeTest()
-        else -> {}
+        else -> {
+        }
     }
 
     override fun onLeaveTest() {
@@ -127,7 +132,8 @@ open class BasePresenter : MvpPresenter<TestView>(), TestPresenter {
                 state = TestPresenter.State.INTERRUPTED
             }
             TestPresenter.State.PREPARED -> onPauseCountDown()
-            else -> {}
+            else -> {
+            }
         }
         viewState.showLeaveDialog(score)
     }

@@ -11,4 +11,5 @@ interface TestDetailsView: MvpView {
     fun hideProgress()
     fun showStatistics(entries: List<Entry>)
     fun showError(message: String)
+    fun onNotEnoughData()
 }

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.arellomobile.mvp.MvpAppCompatFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.FirebaseAuth
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.firebase.Exercise
 import com.sharipov.brainexercise.mvp.ExercisesView
@@ -27,12 +28,22 @@ class ExercisesFragment : MvpAppCompatFragment(), ExercisesView {
     @InjectPresenter
     lateinit var presenter: ExercisesPresenter
 
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_exercises, container, false).apply {
             toolbar.setupWithNavController(findNavController())
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        auth = FirebaseAuth.getInstance()
+        if (auth.currentUser == null){
+            auth.signInAnonymously()
         }
     }
 

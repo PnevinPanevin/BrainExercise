@@ -162,4 +162,10 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     override fun showProgress() = progressBar.show()
 
     override fun hideProgress() = progressBar.hide()
+
+    override fun onNotEnoughData() {
+        notEnoughTextView.visibility = View.VISIBLE
+        statisticsTextView.visibility = View.GONE
+        chart.visibility = View.GONE
+    }
 }

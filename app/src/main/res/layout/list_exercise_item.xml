@@ -37,7 +37,7 @@
             android:gravity="center_vertical"
             android:paddingStart="@dimen/text_padding_start"
             android:paddingEnd="@dimen/text_padding_end"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:textColor="@android:color/black"
             tools:text="Colors" />
 
@@ -51,7 +51,6 @@
             android:gravity="center_vertical"
             android:paddingStart="@dimen/text_padding_start"
             android:paddingEnd="@dimen/text_padding_end"
-            android:textSize="18sp"
             tools:text="Colors" />
 
     </RelativeLayout>

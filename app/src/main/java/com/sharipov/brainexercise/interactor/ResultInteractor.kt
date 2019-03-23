@@ -12,7 +12,7 @@ class ResultInteractor {
         const val EXPRESSIONS = "EXPRESSIONS"
         const val COMPARISONS = "COMPARISONS"
         const val SHAPES = "SHAPES"
-        const val USER_ID = "XiaomiRedmi 3S1552132188809"
+        const val USER_ID = "DEFAULT_USER"
         const val RESULTS = "results"
     }
 
