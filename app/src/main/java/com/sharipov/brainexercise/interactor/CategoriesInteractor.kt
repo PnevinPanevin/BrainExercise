@@ -23,9 +23,7 @@ class CategoriesInteractor {
 
                 override fun onDataChange(p0: DataSnapshot) = p0.children
                     .mapNotNull { it.getValue(Exercise::class.java) }
-                    .filter {
-                        it.type != TestType.COLORS && it.type != TestType.POSITIONS
-                    }
+                    .filter { it.type != TestType.COLORS }
                     .run { onSuccess(this) }
             }
         )

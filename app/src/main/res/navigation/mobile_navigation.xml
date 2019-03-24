@@ -44,10 +44,19 @@
             android:id="@+id/action_testDetailsFragment_to_progressionsFragment"
             app:destination="@id/progressionsFragment"
             app:launchSingleTop="true" />
+        <action
+            android:id="@+id/action_testDetailsFragment_to_positionsFragment"
+            app:destination="@id/positionsFragment"
+            app:launchSingleTop="true" />
     </fragment>
     <fragment
         android:id="@+id/progressionsFragment"
         android:name="com.sharipov.brainexercise.view.test_fragments.progressions.ProgressionsFragment"
         android:label="fragment_progressions"
         tools:layout="@layout/fragment_progressions" />
+    <fragment
+        android:id="@+id/positionsFragment"
+        android:name="com.sharipov.brainexercise.view.test_fragments.positions.PositionsFragment"
+        android:label="fragment_positions"
+        tools:layout="@layout/fragment_positions" />
 </navigation>

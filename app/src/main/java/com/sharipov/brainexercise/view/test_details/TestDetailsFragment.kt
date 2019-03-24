@@ -123,7 +123,8 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
         TestType.COMPARISONS -> R.id.action_testDetailsFragment_to_comparisonsFragment
         TestType.SHAPES -> R.id.action_testDetailsFragment_to_shapesFragment
         TestType.PROGRESSIONS -> R.id.action_testDetailsFragment_to_progressionsFragment
-        else -> -1
+        TestType.POSITIONS -> R.id.action_testDetailsFragment_to_positionsFragment
+        else -> 0
     }
 
     override fun showStatistics(entries: List<Entry>) {
