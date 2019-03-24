@@ -18,12 +18,18 @@ object ProgressionsRepository {
     //0 - arithmetic, 1 - geometric
     private fun getBaseType(): Int = random.nextInt(1)
 
-    private fun getStart(type: Int): Int =
-        if (type == 0) {
-            random.nextInt(ARITHMETIC_START_BOUND)
-        } else {
-            random.nextInt(GEOMETRIC_START_BOUND)
-        }
+    private fun getStart(type: Int): Int {
+        var start = 0
+        do {
+            start = if (type == 0) {
+                random.nextInt(ARITHMETIC_START_BOUND)
+            } else {
+                random.nextInt(GEOMETRIC_START_BOUND)
+            }
+        } while (start < 0)
+        return start
+    }
+
 
     private fun getRemainder(type: Int): Int =
         if (type == 0) {

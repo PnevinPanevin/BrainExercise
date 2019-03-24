@@ -19,8 +19,6 @@ import com.sharipov.brainexercise.view.DialogManager
 import com.sharipov.brainexercise.view.test_details.TestDetailsFragment.Companion.HINT
 import kotlinx.android.synthetic.main.fragment_shapes.*
 import kotlinx.android.synthetic.main.fragment_shapes.view.*
-import kotlinx.android.synthetic.main.hint_text_view.view.*
-import kotlinx.android.synthetic.main.time_and_score.*
 
 class ShapesFragment : MvpAppCompatFragment(), TestView {
     @InjectPresenter
