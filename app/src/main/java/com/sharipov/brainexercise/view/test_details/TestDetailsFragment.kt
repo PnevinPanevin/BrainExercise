@@ -38,8 +38,6 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     companion object {
         const val TEST_DETAILS = "TEST_DETAILS"
         const val HINT = "HINT"
-        val months =
-            arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec")
     }
 
     @InjectPresenter

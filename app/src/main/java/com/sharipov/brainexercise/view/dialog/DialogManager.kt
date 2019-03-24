@@ -1,15 +1,15 @@
-package com.sharipov.brainexercise.view
+package com.sharipov.brainexercise.view.dialog
 
 import android.content.Context
 import android.content.DialogInterface
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
+import androidx.navigation.NavOptions
 import androidx.navigation.findNavController
 import com.sharipov.brainexercise.R
 import com.sharipov.brainexercise.model.firebase.TestResult
 import com.sharipov.brainexercise.mvp.TestPresenter
-import com.sharipov.brainexercise.view.dialog.FinishDialogFragment
 
 class DialogManager {
     private var activity: FragmentActivity? = null
@@ -43,7 +43,7 @@ class DialogManager {
             positiveText = R.string.card_dialog_positive_button
             positiveAction = {
                 presenter?.saveResults()
-                activity?.findNavController(R.id.navHostFragment)?.navigate(R.id.exercisesFragment)
+                navigateToExercises()
             }
             negativeText = R.string.card_dialog_button_restart_card_test
             negativeAction = { presenter?.onRestartTest() }
@@ -52,14 +52,20 @@ class DialogManager {
 
     }
 
+    private fun navigateToExercises() {
+        val navOptions = NavOptions.Builder()
+            .setPopUpTo(R.id.exercisesFragment, true)
+            .setLaunchSingleTop(true)
+            .build()
+        activity?.findNavController(R.id.navHostFragment)
+            ?.navigate(R.id.exercisesFragment, null, navOptions)
+    }
+
     fun showLeaveDialog(score: Int) = showDialog(
         score,
         R.string.card_quit_dialog_title,
         R.string.card_quit_dialog_positive_button,
-        DialogInterface.OnClickListener { d, w ->
-            activity?.findNavController(R.id.navHostFragment)
-                ?.navigate(R.id.exercisesFragment)
-        },
+        DialogInterface.OnClickListener { d, w -> navigateToExercises() },
         R.string.card_quit_dialog_continue_button,
         DialogInterface.OnClickListener { d, w -> presenter?.onFragmentResume() }
     )

@@ -16,7 +16,7 @@ import com.sharipov.brainexercise.model.repository.ComparisonAnswer
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.BasePresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
-import com.sharipov.brainexercise.view.DialogManager
+import com.sharipov.brainexercise.view.dialog.DialogManager
 import kotlinx.android.synthetic.main.count_down_text_view.*
 import kotlinx.android.synthetic.main.fragment_comparisons.*
 import kotlinx.android.synthetic.main.fragment_comparisons.view.*
@@ -29,7 +29,8 @@ class ComparisonsFragment : MvpAppCompatFragment(),
     @InjectPresenter
     lateinit var presenter: BasePresenter
 
-    private val dialogManager: DialogManager = DialogManager()
+    private val dialogManager: DialogManager =
+        DialogManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

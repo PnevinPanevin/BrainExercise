@@ -15,7 +15,7 @@ import com.sharipov.brainexercise.model.repository.Answer
 import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.NBackPresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
-import com.sharipov.brainexercise.view.DialogManager
+import com.sharipov.brainexercise.view.dialog.DialogManager
 import com.sharipov.brainexercise.view.test_details.TestDetailsFragment.Companion.HINT
 import kotlinx.android.synthetic.main.fragment_shapes.*
 import kotlinx.android.synthetic.main.fragment_shapes.view.*

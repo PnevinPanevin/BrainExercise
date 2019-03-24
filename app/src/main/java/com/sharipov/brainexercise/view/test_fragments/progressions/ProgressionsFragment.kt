@@ -17,7 +17,7 @@ import com.sharipov.brainexercise.mvp.TestView
 import com.sharipov.brainexercise.presentation.BasePresenter
 import com.sharipov.brainexercise.util.LockableRecyclerView
 import com.sharipov.brainexercise.util.MaterialNumberpad
-import com.sharipov.brainexercise.view.DialogManager
+import com.sharipov.brainexercise.view.dialog.DialogManager
 import com.sharipov.brainexercise.view.test_details.TestDetailsFragment
 import kotlinx.android.synthetic.main.fragment_progressions.*
 import kotlinx.android.synthetic.main.fragment_progressions.view.*
@@ -26,7 +26,8 @@ class ProgressionsFragment : MvpAppCompatFragment(), TestView {
     @InjectPresenter
     lateinit var presenter: BasePresenter
 
-    private val dialogManager: DialogManager = DialogManager()
+    private val dialogManager: DialogManager =
+        DialogManager()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

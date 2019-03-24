@@ -5,6 +5,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sharipov.brainexercise.model.firebase.Exercise
+import com.sharipov.brainexercise.model.firebase.TestType
 
 class CategoriesInteractor {
     companion object {
@@ -22,6 +23,9 @@ class CategoriesInteractor {
 
                 override fun onDataChange(p0: DataSnapshot) = p0.children
                     .mapNotNull { it.getValue(Exercise::class.java) }
+                    .filter {
+                        it.type != TestType.COLORS && it.type != TestType.POSITIONS
+                    }
                     .run { onSuccess(this) }
             }
         )
