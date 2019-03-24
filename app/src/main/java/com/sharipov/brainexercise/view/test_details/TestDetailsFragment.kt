@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.text.HtmlCompat
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
@@ -15,7 +16,6 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.devs.readmoreoption.ReadMoreOption
 import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.components.Legend
-import com.github.mikephil.charting.components.YAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -28,16 +28,18 @@ import com.sharipov.brainexercise.model.firebase.TestType
 import com.sharipov.brainexercise.mvp.TestDetailsView
 import com.sharipov.brainexercise.view.hide
 import com.sharipov.brainexercise.view.show
-import com.sharipov.brainexercise.view.statistics.DateXAxisFormatter
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_test_details.*
 import kotlinx.android.synthetic.main.fragment_test_details.view.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     companion object {
         const val TEST_DETAILS = "TEST_DETAILS"
         const val HINT = "HINT"
+        val months =
+            arrayOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Okt", "Nov", "Dec")
     }
 
     @InjectPresenter
@@ -76,7 +78,7 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
                 .labelUnderLine(true)
                 .expandAnimation(true)
                 .build()
-                .addReadMoreTo(descriptionTextView, Html.fromHtml(testDetails.description))
+                .addReadMoreTo(descriptionTextView, HtmlCompat.fromHtml(testDetails.description, HtmlCompat.FROM_HTML_MODE_COMPACT))
         }
     }
 
@@ -103,8 +105,8 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
 
         with(chart.xAxis) {
             textColor = Color.BLACK
-            valueFormatter = DateXAxisFormatter()
             isEnabled = true
+            valueFormatter = DateFormatter()
             setDrawGridLines(false)
             setAvoidFirstLastClipping(true)
         }
@@ -114,7 +116,7 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
             setDrawGridLines(true)
         }
 
-        val rightAxis = chart.getAxisRight()
+        val rightAxis = chart.axisRight
         rightAxis.isEnabled = false
     }
 
@@ -127,23 +129,26 @@ class TestDetailsFragment : MvpAppCompatFragment(), TestDetailsView {
     }
 
     override fun showStatistics(entries: List<Entry>) {
-        val set = LineDataSet(entries, "Data Set")
-        with(set) {
-            axisDependency = YAxis.AxisDependency.LEFT
-            color = ColorTemplate.getHoloBlue()
-            lineWidth = 2f
-            circleRadius = 4f
-            fillAlpha = 65
-            fillColor = ColorTemplate.getHoloBlue()
-            highLightColor = Color.rgb(244, 117, 117)
-            valueTextColor = Color.BLACK
-            valueTextSize = 9f
-            setCircleColor(ColorTemplate.COLORFUL_COLORS.last())
-            setDrawValues(false)
-        }
-
         val dataSets = ArrayList<ILineDataSet>()
-        dataSets += set
+        val results = LineDataSet(entries, "Результат")
+        results.lineWidth = 2.5f
+        results.circleRadius = 4f
+
+        val rColor = ColorTemplate.VORDIPLOM_COLORS.first()
+        results.color = rColor
+        results.setCircleColor(rColor)
+
+        dataSets += results
+
+//        val mistakes = LineDataSet(entries.last(), "Ошибки")
+//        results.lineWidth = 2.5f
+//        results.circleRadius = 4f
+//
+//        val mColor = ColorTemplate.VORDIPLOM_COLORS[1]
+//        results.color = mColor
+//        results.setCircleColor(mColor)
+//
+//        dataSets += mistakes
 
         val data = LineData(dataSets)
         with(chart) {
