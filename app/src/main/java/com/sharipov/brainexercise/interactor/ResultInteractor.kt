@@ -6,6 +6,8 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.sharipov.brainexercise.model.firebase.TestResult
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ResultInteractor {
     companion object {
@@ -19,6 +21,8 @@ class ResultInteractor {
     }
 
     lateinit var userId: String
+
+    private val dateFormat = SimpleDateFormat("D", Locale.getDefault())
 
     fun putResults(testName: String, result: TestResult) {
         FirebaseDatabase.getInstance()
@@ -40,6 +44,8 @@ class ResultInteractor {
 
             override fun onDataChange(p0: DataSnapshot) = p0.children
                 .mapNotNull { it.getValue<TestResult>(TestResult::class.java) }
+                .groupBy { dateFormat.format(Date(it.date)) }
+                .mapNotNull { it.value.maxBy { result -> result.score } }
                 .map { Entry(it.date.toFloat(), it.score.toFloat()) }
                 .run { onSuccess(this) }
         })
